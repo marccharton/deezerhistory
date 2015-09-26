@@ -1,0 +1,90 @@
+var bodyParser = require('body-parser');
+var express = require('express');
+var url = require('url');
+var querystring = require('querystring');
+var http = require('http');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Deezer API' });
+});
+
+
+/* GET '/apiTest' */
+router.get('/apiTest', function(req, res, next) {
+    var apiId = "152891";
+    var redirectUri = "http://localhost:3000/redirectUri";
+
+    var apiconnectUrl = "https://connect.deezer.com/oauth/auth.php?app_id="+apiId+"&redirect_uri="+redirectUri+"&perms=basic_access,email";
+    res.render('connect', { title: 'Deezer API', linktoAPI: apiconnectUrl });
+});
+
+
+/* GET '/redirectUri' */
+router.get('/redirectUri', function(req, res, next) {
+    var apiId = "152891";
+    var secret = "c4f95a095b70fb98753b9d8e904de152";
+    
+    var ret=""; 
+    ret += "Nous avons reçu ceci : " + req.originalUrl + "<br />";
+
+    if (typeof req.param('code') == 'undefined') 
+    {
+        if (typeof req.param('error_reason') != 'undefined')
+            res.send("Impossible de récupérer les infos de l'API car tu as refusé !!!<br /> raison de l'erreur : " + req.param('error_reason'));
+    }
+
+    var code = req.param('code');
+    var apiconnectUrl = "/oauth/access_token.php";
+    apiconnectUrl += "?app_id="+apiId;
+    apiconnectUrl += "&secret="+secret;
+    apiconnectUrl += "&code="+code;
+    
+    // ret += "<a href='"+apiconnectUrl+"'>Ok tu as ton code maintenant il faut récupérer le token</a>";
+    ret += "<h1>Loading data...</h1>";
+
+    var options = {
+      host: 'connect.deezer.com',
+      path: apiconnectUrl
+    };
+    var access_token, expires;
+
+    callback = function(response) {
+        var str = '';
+        response.on('data', function (chunk) { str += chunk; });
+
+        response.on('end', function () {
+            console.log("ok bon on a récupéré cette réponse : " + str);
+            var params = querystring.parse(str);
+            if ('access_token' in params)
+                access_token = params.access_token;
+            if ('expires' in params)
+                expires = params.expires;
+            console.log("params : " + access_token + expires);
+            res.cookie("access_token", access_token);
+            res.cookie("expires", expires);
+            /*req.cookies.access_token = access_token;
+            req.cookies.expires = expires;*/
+            /*console.log("cookies : " + req.cookies.access_token);*/
+            res.redirect("/fini");
+        });
+    }
+
+    http.request(options, callback).end();
+
+});
+
+/* GET '/fini' */
+router.get('/fini', function (req, res, next) {
+    var ret = "";
+    ret += "Le token est : '" + req.cookies.access_token + "'.<br />";
+    ret += "Il expire dans : " + req.cookies.expires + " secondes.<br />";
+
+    ret += "GG tu as tout fini !";
+
+    res.send(ret);
+});
+
+
+module.exports = router;

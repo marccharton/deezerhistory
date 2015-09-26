@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <a href="/api/getcode"> Se connecter à Deezer </a>
+
+    <% if (typeof token != 'undefined') { %>
+    	<h4> Token :  <%= token %> </h4>
+    	<a href="/api/deletetoken"> Supprimer le token </a>
+		<h2>Tester l'API : </h2>
+		<a href="/api/call/userinfo">
+			<button type="button">Afficher mes informations</button>
+		</a>
+		<a href="/api/call/history">
+			<button type="button">Afficher mon historique</button>
+		</a>
+    <% } %>
+  </body>
+</html>
