@@ -52,7 +52,9 @@ Fonctionnalités présentes :
 
 ### Que garder ?
 
- - Tout va passer dans un dossier OLD/.  
+ - Tout va passer dans un dossier "OLD/".  
  - On va partir du projet "Deezer History/" qui était déjà avancé et tout nettoyer.  
- - Récupérer la communication avec la base dans "Route + MOngoDB"  
- - 
+ - Récupérer la communication avec la base dans "Route + MOngoDB/"  
+ - Récupérer l'accès à l'api deezer de "API deezer/" et du projet "Deezer History/" (qui vient d'ailleurs de "API deezer")
+ - Récupérer l'accès aux informations de "API deezer/" et "Deezer History/"
+ - On ne va pas utiliser trois milles outils dès maintenant pour ne pas se surcharger. On oubli deja la mise en place de smacs ou meme de sass pour l'instant. On reprend juste le projet front de base et on nettoie le code
