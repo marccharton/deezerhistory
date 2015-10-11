@@ -11,7 +11,7 @@ var app = angular.module('app', ['ngRoute', 'ngResource']);
 //---------------
 
 app.factory('HistoryItems', ['$resource', function($resource){
- 	return $resource('/history', null, {
+ 	return $resource('http://127.0.0.1:3000/history', null, {
  		'query': {method:'GET', isArray:true},
  		'update': { method:'PUT'}
  	});
