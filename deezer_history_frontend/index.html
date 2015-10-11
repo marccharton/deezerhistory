@@ -2,17 +2,20 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title><%= title %></title>
+    <title>Deezer History</title>
     <link rel='stylesheet' href='style/style.css' />
+    <script type="text/javascript" src="libs/angular.js"></script>
+    <script type="text/javascript" src="libs/angular-route.js"></script>
+    <script type="text/javascript" src="libs/angular-resource.js"></script>
 </head>
 <body ng-app="app">
     <header class="l-header">
         <div class="l-container">
-            <h1><%= title %> (<%= message %>)</h1>
+            <h1>Deezer History (Not Connected)</h1>
         </div>
     </header>
     <div class="l-container">
-        <h3>You are <%= message %></h3>
+        <h3>You are Not Connected</h3>
 
         <div>
             <a href="/api/getcode"> SE CONNECTER </a>
@@ -58,9 +61,6 @@
 
     
 <!-- LIBRARIES -->
-    <script type="text/javascript" src="libs/angular.js"></script>
-    <script type="text/javascript" src="libs/angular-route.js"></script>
-    <script type="text/javascript" src="libs/angular-resource.js"></script>
     <script type="text/javascript" src="libs/jquery.js"></script>
     <script type="text/javascript" src="libs/modernizr.js"></script>
 <!-- SCRIPTS -->

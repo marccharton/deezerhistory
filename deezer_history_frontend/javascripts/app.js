@@ -25,6 +25,7 @@ app.factory('HistoryItems', ['$resource', function($resource){
 app.controller('HistoryListController', ['$scope', 'HistoryItems', function ($scope, HistoryItems) {
 	$scope.items = HistoryItems.query();
 	console.log($scope.items);
+
 	/*Todos.success(function(data){
         $scope.todos = data;
       }).error(function(data, status){
