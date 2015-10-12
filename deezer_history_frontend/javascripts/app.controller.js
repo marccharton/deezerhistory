@@ -12,6 +12,8 @@
     	.module('app')
     	.controller('HistoryListController', HistoryListController);
 
+	HistoryListController.$inject("$scope", "HistoryItems");
+
 	function HistoryListController($scope, HistoryItems)
 	{
 		$scope.items = HistoryItems.query();
