@@ -12,7 +12,7 @@
     	.module('app')
     	.factory('HistoryItems', HistoryItems);
 
-	HistoryItems.$inject("$scope", "$resource");
+	HistoryItems.$inject = ["$scope", "$resource"];
 
 	function HistoryItems($scope, $resource)
 	{
