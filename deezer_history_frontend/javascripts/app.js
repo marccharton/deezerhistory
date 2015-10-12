@@ -4,44 +4,73 @@
 // * 
 // *
 
-var app = angular.module('app', ['ngRoute', 'ngResource']);
 
-//---------------
-// S E R V I C E S
-//---------------
-
-app.factory('HistoryItems', ['$resource', function($resource){
- 	return $resource('http://127.0.0.1:3000/history', null, {
- 		'query': {method:'GET', isArray:true},
- 		'update': { method:'PUT'}
- 	});
-}]);
+(function() {
+  'use strict';
 
 
-//---------------
-// C O N T R O L L E R S
-//---------------
+    angular
+        .module('app',
+        [
+            'ngRoute', 
+            'ngResource'
+        ]);
 
-app.controller('HistoryListController', ['$scope', 'HistoryItems', function ($scope, HistoryItems) {
-	$scope.items = HistoryItems.query();
-	console.log($scope.items);
+        
+	//---------------
+	// S E R V I C E S
+	//---------------
 
-	/*Todos.success(function(data){
-        $scope.todos = data;
-      }).error(function(data, status){
-        console.log(data, status);
-        $scope.todos = [];
-      });*/
-}]);
+	angular
+    	.module('app')
+    	.factory('HistoryItems', HistoryItems);
 
-//---------------
-// R O U T E S
-//---------------
+	function HistoryItems($scope, HistoryItems)
+	{
+	 	return $resource('http://127.0.0.1:3000/history', null, {
+	 		'query': {method:'GET', isArray:true},
+	 		'update': { method:'PUT'}
+	 	});
+	}
 
-app.config(['$routeProvider', function ($routeProvider) {
-	$routeProvider
-		.when('/', {
-		  templateUrl: '/historyList.html',
-		  controller: 'HistoryListController'
-		});
-}]);
+
+	//---------------
+	// C O N T R O L L E R S
+	//---------------
+
+	angular
+    	.module('app')
+    	.controller('HistoryListController', HistoryListController);
+
+	function HistoryListController($scope, HistoryItems)
+	{
+		$scope.items = HistoryItems.query();
+		console.log($scope.items);
+
+		/*Todos.success(function(data){
+	        $scope.todos = data;
+	      }).error(function(data, status){
+	        console.log(data, status);
+	        $scope.todos = [];
+	      });*/
+	}
+
+	//---------------
+	// R O U T E S
+	//---------------
+
+	angular
+    	.module('app')
+    	.config(routeConfig);
+
+	function routeConfig($routeProvider)
+	{
+		$routeProvider
+			.when('/', {
+			  templateUrl: '/historyList.html',
+			  controller: 'HistoryListController'
+			});
+	}
+
+
+})();
