@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
 
 	res.json("Deezer History API");
-
+	
 });
 
 module.exports = router;
