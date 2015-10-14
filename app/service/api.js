@@ -1,3 +1,11 @@
+///
+/// @filename : app/service/api.js
+/// @date_creation : 14/10/2105
+///
+
+// // // // // // // // // // // // // 
+// D E P E N D E N C I E S
+
 var bodyParser = require('body-parser');
 var express = require('express');
 var url = require('url');
@@ -5,13 +13,12 @@ var querystring = require('querystring');
 var http = require('http');
 var router = express.Router();
 
-// GET home page
-router.get('/api', function(req, res, next) {
-});
 
-// GET '/api/getcode' 
-router.get('/getcode', function(req, res, next) {
-    var app_id = "152891";
+// // // // // // // // // // // // // 
+// R O U T E S
+
+exports.GetCode = function(req, res, next) {
+    var app_id = "165885";
     var redirect_uri = "http://localhost:3000/api/gettoken";
 
     var url = "https://connect.deezer.com/oauth/auth.php";
@@ -20,12 +27,12 @@ router.get('/getcode', function(req, res, next) {
     url += "&perms=" + "basic_access" + ",email" + ",listening_history";
     
     res.redirect(url);
-});
+};
 
-// GET '/api/gettoken'
-router.get('/gettoken', function(req, res, next) {
-    var apiId = "152891";
-    var secret = "c4f95a095b70fb98753b9d8e904de152";
+
+exports.GetToken = function(req, res, next) {
+    var apiId =  "165885";
+    var secret = "eb5ee408b035683be6d77cd61c61a75b";
 
     if (typeof req.param('code') == 'undefined')
     {
@@ -36,7 +43,7 @@ router.get('/gettoken', function(req, res, next) {
     }
     else
     {
-        console.log("ouech les amis");
+        console.log("Tout va bien on récupère le code...");
     }
 
     var code = req.param('code');
@@ -60,17 +67,15 @@ router.get('/gettoken', function(req, res, next) {
             res.redirect("/");
         });
     }).end();
-});
+};
 
-// GET '/api/deletetoken' 
-router.get('/deletetoken', function (req, res, next) {
+
+exports.DeleteToken = function (req, res, next) {
     res.clearCookie('access_token');
     res.redirect('/');
-});
+};
 
-
-// GET '/api/call/userinfo' 
-router.get('/call/userinfo', function (req, res, next) {
+exports.GetUserInformations = function (req, res, next) {
     var pathstr = "/user/me";
     var token = "?access_token=" + req.cookies.access_token;
     var options = { host: 'api.deezer.com', path: pathstr + token};
@@ -83,17 +88,16 @@ router.get('/call/userinfo', function (req, res, next) {
             var ret = "";
             var user = JSON.parse(str);
             res.cookie("user", user);
-            ret += "Bonjour " + user.firstname + " " + user.lastname + " ! <br />";
+            /*ret += "Bonjour " + user.firstname + " " + user.lastname + " ! <br />";
             ret += "Ton pseudo est : " + user.name + " <br />";
             ret += "Ton mail est : " + user.email + " <br />";
-            ret += "Tu t'es inscrit sur deezer le : " + user.inscription_date + " <br />";
-            res.send(ret);
+            ret += "Tu t'es inscrit sur deezer le : " + user.inscription_date + " <br />";*/
+            res.json(user);
         });
     }).end();
-});
+};
 
-// GET '/api/call/history' 
-router.get('/call/history', function (req, res, next) {
+exports.GetHistoryList = function (req, res, next) {
     var pathstr = "/user/me/history";
     pathstr += "?access_token=" + req.cookies.access_token;
     pathstr += "&limit=" + 100;
@@ -121,10 +125,4 @@ router.get('/call/history', function (req, res, next) {
             res.send(ret);
         });
     }).end();
-});
-
-// 
-
-
-
-module.exports = router;
+};
