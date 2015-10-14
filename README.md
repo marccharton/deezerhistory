@@ -10,7 +10,7 @@ Projets Actuels
 ### API Deezer/
 
  - Simple appli express pour la connection à l'api deezer.
- - Useless si utilisation du SDK
+ - Useless si utilisation du SDK -- ! Pas possitble SDK car coté client
  - Permet de voir vite fait comment se connecter avec OAuth à deezer et récupération du token
  - Récupération des informations de l'utilisateur
  - Récupération des 50 dernières chansons utilisées depuis l'api deezer
@@ -46,14 +46,18 @@ Fonctionnalités présentes :
 
 ### A faire
 
- - Commencer par fusionner les projets
- - Contstruire une base propre de projet
+ - X Commencer par fusionner les projets
+ - X Contstruire une base propre de projet
+ - Reprendre les fonctionnalités de base
+ - Développement de la partie back
+ - Test sur un font simple
+ - Evolution du Front
 
 
 ### Que garder ?
 
- - Tout va passer dans un dossier "OLD/".  
- - On va partir du projet "Deezer History/" qui était déjà avancé et tout nettoyer.  
+ - X Tout va passer dans un dossier "OLD/".  
+ - X On va partir du projet "Deezer History/" qui était déjà avancé et tout nettoyer.  
  - Récupérer la communication avec la base dans "Route + MOngoDB/"  
  - Récupérer l'accès à l'api deezer de "API deezer/" et du projet "Deezer History/" (qui vient d'ailleurs de "API deezer")
  - Récupérer l'accès aux informations de "API deezer/" et "Deezer History/"
