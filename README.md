@@ -15,7 +15,6 @@ Projets Actuels
  - Récupération des informations de l'utilisateur
  - Récupération des 50 dernières chansons utilisées depuis l'api deezer
 
-
 ### Deezer History/  
 
  - Est censé être le projet remis à plat
@@ -49,6 +48,7 @@ Fonctionnalités présentes :
  - X Commencer par fusionner les projets
  - X Contstruire une base propre de projet
  - Reprendre les fonctionnalités de base
+ - Reprendre le code de l'API deezer, le token est stocké dans un cookie à l'arrache : changer le fonctionnement
  - Développement de la partie back
  - Test sur un font simple
  - Evolution du Front
